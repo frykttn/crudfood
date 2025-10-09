@@ -6,6 +6,7 @@ import LoginComponent from "./components/pages/Login"
 import Administrador from "./components/pages/Administrador"
 import { BrowserRouter, Routes, Route } from "react-router"
 import Error404 from "./components/pages/Error404"
+import FormularioProducto from "./components/pages/producto/FormularioProducto"
 function App() {
 
   return (
@@ -17,6 +18,8 @@ function App() {
       <Route path="/detalle" element={<DetalleProducto></DetalleProducto>}/>
       <Route path="/login" element={<LoginComponent></LoginComponent>}/>
       <Route path="/administrador" element={<Administrador></Administrador>}/>
+      <Route path="/administrador/crear" element={<FormularioProducto></FormularioProducto>}/>
+      <Route path="/administrador/editar" element={<FormularioProducto></FormularioProducto>}/>
       <Route path="*" element={<Error404/>}/>
     </Routes>
     <Footer></Footer>
