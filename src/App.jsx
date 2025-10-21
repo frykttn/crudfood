@@ -12,7 +12,7 @@ function App() {
     <>
       <BrowserRouter>
         <MenuComponent></MenuComponent>
-        <main>
+        <main className="container my-3">
           <Routes>
             <Route path="/" element={<Inicio></Inicio>} />
             <Route
