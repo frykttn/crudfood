@@ -1,5 +1,6 @@
 import { Button, Table } from "react-bootstrap";
 import { Link } from "react-router";
+import ItemProducto from "./producto/ItemProducto.jsx"
 
 
 
@@ -33,6 +34,7 @@ const Administrador = () => {
           </tr>
         </thead>
         <tbody>
+          <ItemProducto/>
         </tbody>
       </Table>
     </section>
