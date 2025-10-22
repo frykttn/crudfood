@@ -16,3 +16,10 @@ main{
   font-style: normal;
 }
 
+.banner {
+  width: 100%;       /* o un porcentaje menor si querés */
+  height: auto;      /* mantiene la proporción */
+  max-height: 300px; /* ajustá este valor para reducirla */
+  object-fit: cover; /* opcional, recorta si es necesario */
+}
+
