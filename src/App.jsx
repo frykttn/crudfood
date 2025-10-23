@@ -7,7 +7,9 @@ import Administrador from "./components/pages/Administrador";
 import { BrowserRouter, Routes, Route } from "react-router";
 import Error404 from "./components/pages/Error404";
 import FormularioProducto from "./components/pages/producto/FormularioProducto";
+import { useState } from "react";
 function App() {
+  const [usuarioLogueado, setUsuarioLogueado] = useState(false)
   return (
     <>
       <BrowserRouter>
@@ -19,7 +21,7 @@ function App() {
               path="/detalle"
               element={<DetalleProducto></DetalleProducto>}
             />
-            <Route path="/login" element={<LoginComponent></LoginComponent>} />
+            <Route path="/login" element={<LoginComponent setUsuarioLogueado={setUsuarioLogueado}></LoginComponent>} />
             <Route
               path="/administrador"
               element={<Administrador></Administrador>}
