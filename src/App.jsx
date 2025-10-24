@@ -8,8 +8,10 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import Error404 from "./components/pages/Error404";
 import FormularioProducto from "./components/pages/producto/FormularioProducto";
 import { useEffect, useState } from "react";
+import ProtectorAdmin from "./components/routes/ProtectorAdmin";
 function App() {
-  const sesionUsuario = JSON.parse(sessionStorage.getItem('usuarioKey')) || false;
+  const sesionUsuario =
+    JSON.parse(sessionStorage.getItem("usuarioKey")) || false;
   const [usuarioLogueado, setUsuarioLogueado] = useState(sesionUsuario);
   useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
@@ -17,7 +19,10 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <MenuComponent></MenuComponent>
+        <MenuComponent
+          usuarioLogueado={usuarioLogueado}
+          setUsuarioLogueado={setUsuarioLogueado}
+        ></MenuComponent>
         <main className="container my-3">
           <Routes>
             <Route path="/" element={<Inicio></Inicio>} />
@@ -35,16 +40,26 @@ function App() {
             />
             <Route
               path="/administrador"
-              element={<Administrador></Administrador>}
-            />
-            <Route
-              path="/administrador/crear"
-              element={<FormularioProducto></FormularioProducto>}
-            />
-            <Route
-              path="/administrador/editar"
-              element={<FormularioProducto></FormularioProducto>}
-            />
+              element={
+                <ProtectorAdmin
+                  usuarioLogueado={usuarioLogueado}
+                ></ProtectorAdmin>
+              }
+            >
+              <Route
+                index
+                element={<Administrador></Administrador>}
+              />
+              <Route
+                path="crear"
+                element={<FormularioProducto></FormularioProducto>}
+              />
+              <Route
+                path="editar"
+                element={<FormularioProducto></FormularioProducto>}
+              />
+            </Route>
+
             <Route path="*" element={<Error404 />} />
           </Routes>
         </main>

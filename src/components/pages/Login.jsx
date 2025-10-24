@@ -26,7 +26,7 @@ const navegacion = useNavigate()
       setUsuarioLogueado(true)
       //redireccionar a la pagina del administrador
       Swal.fire({
-        title: "Bienvvenido administrador",
+        title: "Bienvenido administrador",
         text: "Iniciaste sesion correctamente",
         icon: "success",
         
