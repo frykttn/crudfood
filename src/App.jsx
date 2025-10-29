@@ -12,13 +12,17 @@ import ProtectorAdmin from "./components/routes/ProtectorAdmin";
 function App() {
   const sesionUsuario =
     JSON.parse(sessionStorage.getItem("usuarioKey")) || false;
-  const [usuarioLogueado, setUsuarioLogueado] = useState(sesionUsuario);
-
-const [productos, setProductos] = useState([])
+    const productosLS = JSON.parse(localStorage.getItem('productosKey')) || []
+const [usuarioLogueado, setUsuarioLogueado] = useState(sesionUsuario);
+const [productos, setProductos] = useState(productosLS)
 
   useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
   }, [usuarioLogueado]);
+
+  useEffect(()=>{
+    localStorage.setItem('productosKey', JSON.stringify(productos))
+  }, [productos])
   return (
     <>
       <BrowserRouter>
