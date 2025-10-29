@@ -13,6 +13,9 @@ function App() {
   const sesionUsuario =
     JSON.parse(sessionStorage.getItem("usuarioKey")) || false;
   const [usuarioLogueado, setUsuarioLogueado] = useState(sesionUsuario);
+
+const [productos, setProductos] = useState([])
+
   useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
   }, [usuarioLogueado]);
@@ -48,7 +51,7 @@ function App() {
             >
               <Route
                 index
-                element={<Administrador></Administrador>}
+                element={<Administrador setProductos={setProductos} productos={productos}></Administrador>}
               />
               <Route
                 path="crear"

@@ -1,20 +1,20 @@
 import { Button } from "react-bootstrap";
 import { Link } from "react-router";
 
-const ItemProducto = () => {
+const ItemProducto = ({itemProducto}) => {
     return (
         <tr>
-      <td className="text-center"></td>
-      <td></td>
-      <td className="text-end">$</td>
+      <td className="text-center">1</td>
+      <td>{itemProducto.nombreProducto}</td>
+      <td className="text-end">{itemProducto.precio}</td>
       <td className="text-center">
         <img
-          src={{}}
-          className="img-thumbnail"
-          alt={{}}
+          src={itemProducto.imagen}
+          className="banner"
+          alt={'pizza'}
         ></img>
       </td>
-      <td></td>
+      <td>{itemProducto.categoria}</td>
       <td className="text-center">
         <Link className="me-lg-2 btn btn-warning" to={`/administrador/editar/`}>
           <i className="bi bi-pencil-square"></i>
