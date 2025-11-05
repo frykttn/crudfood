@@ -2,14 +2,31 @@ import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from 'uuid';
 import Swal from "sweetalert2";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router";
 
-const FormularioProducto = ({ titulo, crearProducto }) => {
+const FormularioProducto = ({ titulo, crearProducto, buscarProducto, modificarProducto }) => {
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
+  const {id} = useParams()
+  const navegacion = useNavigate()
+
+  useEffect(()=>{
+    if(titulo === "Editar producto"){
+      const productoBuscado = buscarProducto(id)
+      setValue('nombreProducto', productoBuscado.nombreProducto )
+      setValue('precio', productoBuscado.precio )
+      setValue('imagen', productoBuscado.imagen )
+      setValue('descripcion_breve', productoBuscado.descripcion_breve )
+      setValue('descripcion_amplia', productoBuscado.descripcion_amplia )
+      setValue('categoria', productoBuscado.categoria)
+    }
+  })
 
   const onSubmit = (data) => {
     if (titulo === "Crear producto") {
@@ -26,6 +43,23 @@ const FormularioProducto = ({ titulo, crearProducto }) => {
       }
     } else {
       //aqui tengo que agregar el editar
+      if(modificarProducto(id, data)){
+        //mostrar un cartel de producto modificado
+        Swal.fire({
+          title:"Producto modificado",
+          text:`El producto ${data.nombreProducto} se actualizo correctamente`,
+          icon:"success",
+        })
+        //redireccionar a la tabla del administrador
+        navegacion('/administrador')
+      }else{
+        //si no se modifico mostrar un mensaje de error
+        Swal.fire({
+          title:"Ocurrio un error",
+          text:`No se pudo actualizar el producto ${data.nombreProducto}`,
+          icon:"error",
+        })
+      }
     }
   };
 

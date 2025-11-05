@@ -35,8 +35,8 @@ const [productos, setProductos] = useState(productosLS)
      return true
   }
 
-  const editarProducto = (idProducto)=>{
-    const productoBuscado = productos.find((itemProducto)=> itemProducto === idProducto)
+  const buscarProducto = (idProducto)=>{
+    const productoBuscado = productos.find((prod)=> prod.id === idProducto)
     return productoBuscado
   }
 
@@ -94,8 +94,8 @@ const [productos, setProductos] = useState(productosLS)
                 element={<FormularioProducto titulo="Crear producto" crearProducto={crearProducto} ></FormularioProducto>}
               />
               <Route
-                path="editar"
-                element={<FormularioProducto titulo="Editar producto"></FormularioProducto>}
+                path="editar/:id"
+                element={<FormularioProducto titulo="Editar producto" buscarProducto={buscarProducto} modificarProducto={modificarProducto}></FormularioProducto>}
               />
             </Route>
 
