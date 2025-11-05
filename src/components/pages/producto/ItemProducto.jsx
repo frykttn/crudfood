@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import Swal from "sweetalert2";
 
 
-const ItemProducto = ({itemProducto, borrarProducto}) => {
+const ItemProducto = ({itemProducto, borrarProducto, fila}) => {
 
    
   const eliminarProducto =  () => {
@@ -33,7 +33,7 @@ const ItemProducto = ({itemProducto, borrarProducto}) => {
     
     return (
         <tr>
-      <td className="text-center">1</td>
+      <td className="text-center">{fila}</td>
       <td>{itemProducto.nombreProducto}</td>
       <td className="text-end">{itemProducto.precio}</td>
       <td className="text-center">
