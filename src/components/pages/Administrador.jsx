@@ -1,7 +1,7 @@
 import { Button, Table } from "react-bootstrap";
 import { Link } from "react-router";
 import ItemProducto from "./producto/ItemProducto.jsx"
-import productosPrueba from "../../data/ProductoPrueba.js";
+import productosPrueba from "../../data/productoPrueba.js";
 
 
 
