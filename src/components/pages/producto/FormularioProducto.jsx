@@ -1,82 +1,31 @@
-import { useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router";
+import { v4 as uuidv4 } from 'uuid';
 import Swal from "sweetalert2";
 
-
-const FormularioProducto = ({
-  titulo,
-  modificarProducto,
-}) => {
+const FormularioProducto = ({ titulo, crearProducto }) => {
   const {
     register,
     handleSubmit,
     reset,
-    setValue,
     formState: { errors },
   } = useForm();
-  const { id } = useParams();
-  const navegacion = useNavigate();
 
-  useEffect(() => {
-    buscarProducto();
-  });
-
-  const buscarProducto = async () => {
-    if (titulo === "Editar Producto") {
-      console.log(id);
-      const respuesta = await obtenerProductoPorID(id);
-      if (respuesta.status === 200) {
-        const productoBuscado = await respuesta.json();
-        console.log(productoBuscado);
-        setValue("nombreProducto", productoBuscado.nombreProducto);
-        setValue("precio", productoBuscado.precio);
-        setValue("imagen", productoBuscado.imagen);
-        setValue("descripcion_breve", productoBuscado.descripcion_breve);
-        setValue("descripcion_amplia", productoBuscado.descripcion_amplia);
-        setValue("categoria", productoBuscado.categoria);
-      }else{
-        alert('ocurrio un error intentelo mas tarde')
-      }
-    }
-  };
-
-  const onSubmit = async(data) => {
-    console.log(data)
-    if (titulo === "Crear Producto") {
+  const onSubmit = (data) => {
+    if (titulo === "Crear producto") {
       //agregar id
-      const respuesta = await crearProducto(data)
-      if (respuesta.status === 201) {
+      data.id = uuidv4()
+      console.log(data)
+      if(crearProducto(data)){
         Swal.fire({
-          title: "Producto creado",
-          text: `El producto ${data.nombreProducto} se creo correctamente`,
-          icon: "success",
-        });
-        reset();
-      }else{
-        alert('Ocurrio un error, intentelo luego.')
+          title:"Producto creado",
+          text:`El producto ${data.nombreProducto} se creo correctamente`,
+          icon:"success",
+        })
+        reset()
       }
     } else {
       //aqui tengo que agregar el editar
-      const respuesta = await editarProductoAPI(id, data)
-      if (respuesta.status === 200) {
-        //mostrar un cartel de producto modificado
-        Swal.fire({
-          title: "Producto modificado",
-          text: `El producto ${data.nombreProducto} se actualizo correctamente`,
-          icon: "success",
-        });
-        //redireccionar a la tabla del administrador
-        navegacion("/administrador");
-      } else {
-        //sin no se modifico mostrar un mensaje de error
-        Swal.fire({
-          title: "Ocurrio un error",
-          text: `No se pudo actualizar el producto ${data.nombreProducto}`,
-          icon: "error",
-        });
-      }
     }
   };
 
@@ -228,6 +177,6 @@ const FormularioProducto = ({
     </section>
   );
 };
-
+console.log("Componente FormularioProducto montado")
 
 export default FormularioProducto;

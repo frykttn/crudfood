@@ -6,7 +6,7 @@ import productosPrueba from "../../data/ProductoPrueba.js";
 
 
 
-const Administrador = ({setProductos, productos}) => {
+const Administrador = ({setProductos, productos, borrarProducto}) => {
 
   const cargarroductosPrueba =()=>{
     setProductos(productosPrueba)
@@ -42,7 +42,7 @@ const Administrador = ({setProductos, productos}) => {
         <tbody>
           {
             productos.map((itemProducto)=>
-              <ItemProducto itemProducto={itemProducto} key={itemProducto.id}></ItemProducto>
+              <ItemProducto itemProducto={itemProducto} key={itemProducto.id} borrarProducto={borrarProducto}></ItemProducto>
             )
           }
         </tbody>

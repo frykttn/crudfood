@@ -23,6 +23,17 @@ const [productos, setProductos] = useState(productosLS)
   useEffect(()=>{
     localStorage.setItem('productosKey', JSON.stringify(productos))
   }, [productos])
+
+  const crearProducto = (productoNuevo)=>{
+    setProductos([...productos, productoNuevo ])
+    return true
+  }
+
+  const borrarProducto = (idProducto)=>{
+     const productosFiltrados = productos.filter((itemProducto)=> itemProducto.id !== idProducto)
+     setProductos(productosFiltrados)
+     return true
+  }
   return (
     <>
       <BrowserRouter>
@@ -55,15 +66,15 @@ const [productos, setProductos] = useState(productosLS)
             >
               <Route
                 index
-                element={<Administrador setProductos={setProductos} productos={productos}></Administrador>}
+                element={<Administrador setProductos={setProductos} productos={productos} borrarProducto={borrarProducto}></Administrador>}
               />
               <Route
                 path="crear"
-                element={<FormularioProducto></FormularioProducto>}
+                element={<FormularioProducto titulo="Crear producto" crearProducto={crearProducto} ></FormularioProducto>}
               />
               <Route
                 path="editar"
-                element={<FormularioProducto></FormularioProducto>}
+                element={<FormularioProducto titulo="Editar producto"></FormularioProducto>}
               />
             </Route>
 
