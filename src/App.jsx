@@ -34,6 +34,27 @@ const [productos, setProductos] = useState(productosLS)
      setProductos(productosFiltrados)
      return true
   }
+
+  const editarProducto = (idProducto)=>{
+    const productoBuscado = productos.find((itemProducto)=> itemProducto === idProducto)
+    return productoBuscado
+  }
+
+  const modificarProducto = (idProducto, datosProducto)=>{
+    const productosActualizados = productos.map((itemProducto)=>{
+      if(itemProducto.id === idProducto){
+         // actualizar el prodducto
+         return {
+          ...itemProducto,
+          ...datosProducto
+         }
+      }
+      return itemProducto
+    })
+    //actualizar el state
+    setProductos(productosActualizados)
+    return true
+  }
   return (
     <>
       <BrowserRouter>
