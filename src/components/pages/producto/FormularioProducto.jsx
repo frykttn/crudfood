@@ -211,6 +211,6 @@ const FormularioProducto = ({ titulo, crearProducto, buscarProducto, modificarPr
     </section>
   );
 };
-console.log("Componente FormularioProducto montado")
+
 
 export default FormularioProducto;
